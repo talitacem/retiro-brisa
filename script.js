@@ -105,70 +105,62 @@ document.addEventListener('DOMContentLoaded', () => {
             const FORMSPREE_URL = 'https://formspree.io/f/xrpzqooz';
             const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbybiWhU3MYT4-qM2npdXC8xVOZTgdymehRUNwGTDrLrnzYZXUi8cfE5LjOhucWECJc_/exec';
             
-            const rawData = new FormData(form);
-            const cleanData = new FormData();
+            // LER O DOM DIRETAMENTE (BLINDADO CONTRA QUALQUER NAVEGADOR ANTIGO)
+            const getVal = (id) => document.getElementById(id) ? document.getElementById(id).value : "";
+            const getRadio = (name) => {
+                const el = document.querySelector('input[name="' + name + '"]:checked');
+                return el ? el.value : "";
+            };
+            const getCheck = (id) => (document.getElementById(id) && document.getElementById(id).checked) ? "Sim" : "Não";
 
-            // Mapping to Portuguese readable headers for the spreadsheet
-            const mapping = {
-                fullName: "Nome Completo",
-                email: "E-mail",
-                phone: "Telefone / WhatsApp",
-                birthdate: "Data de Nascimento",
-                profession: "Profissão",
-                maritalStatus: "Estado Civil",
-                transport: "Transporte",
-                accommodation: "Acomodação Principal",
-                accommodationMsg: "Obs. Acomodação",
-                diet: "Restrições Alimentares",
-                dietOther: "Obs. Alimentação",
-                emergencyName: "Nome Emergência",
-                emergencyPhone: "Tel Emergência",
-                hasMedicalCondition: "Tem condição médica?",
-                medicalConditionDesc: "Desc. Condição Médica",
-                hasMedication: "Usa medicamento?",
-                medicationDesc: "Desc. Medicamento",
-                experience: "Nível de Yoga",
-                previousRetreat: "Já participou de retiro?",
-                howDidYouHear: "Como soube?",
-                expectations: "Expectativas",
-                imageRelease: "Autoriza Imagem?",
-                declaration: "Aceita Declaração?",
-                paymentType: "Forma de Pagamento",
-                installments: "Opção Parcelamento"
+            const dataObj = {
+                "Nome Completo": getVal('fullName'),
+                "E-mail": getVal('email'),
+                "Telefone / WhatsApp": getVal('phone'),
+                "Data de Nascimento": getVal('birthdate'),
+                "Profissão": getVal('profession'),
+                "Estado Civil": getVal('maritalStatus'),
+                "Acomodação Principal": getRadio('accommodation'),
+                "Obs. Acomodação": getVal('accommodationMsg'),
+                "Restrições Alimentares": getVal('diet'),
+                "Obs. Alimentação": getVal('dietOther'),
+                "Transporte": getVal('transport'),
+                "Nome Emergência": getVal('emergencyName'),
+                "Tel Emergência": getVal('emergencyPhone'),
+                "Tem condição médica?": getVal('hasMedicalCondition') === 'yes' ? 'Sim' : 'Não',
+                "Desc. Condição Médica": getVal('medicalConditionDesc'),
+                "Usa medicamento?": getVal('hasMedication') === 'yes' ? 'Sim' : 'Não',
+                "Desc. Medicamento": getVal('medicationDesc'),
+                "Nível de Yoga": getVal('experience'),
+                "Já participou de retiro?": getVal('previousRetreat') === 'yes' ? 'Sim' : 'Não',
+                "Como soube?": getVal('howDidYouHear'),
+                "Expectativas": getVal('expectations'),
+                "Autoriza Imagem?": getCheck('imageRelease'),
+                "Aceita Declaração?": getCheck('declaration'),
+                "Forma de Pagamento": getRadio('paymentType'),
+                "Opção Parcelamento": getVal('installments')
             };
 
-            for (let [key, value] of rawData.entries()) {
-                cleanData.append(mapping[key] || key, value);
-            }
-
-            // Converte os dados do form para um objeto Javascript simples
-            const dataObj = {};
-            for (let [key, value] of cleanData.entries()) {
-                dataObj[key] = value;
-            }
-
-            // Monta os parâmetros URL Encoded seguros
-            const urlEncodedData = new URLSearchParams();
+            // CONSTRUIR A QUERY STRING MANUALMENTE (BLINDADO CONTRA FALTA DE URLSearchParams)
+            let queryString = "";
             for (let key in dataObj) {
-                urlEncodedData.append(key, dataObj[key]);
+                if (queryString !== "") queryString += "&";
+                queryString += encodeURIComponent(key) + "=" + encodeURIComponent(dataObj[key]);
             }
-            const queryString = urlEncodedData.toString();
 
-            // O TRUQUE DE MESTRE: Enviar os dados NA PRÓPRIA URL da requisição POST.
-            // Se o Google tentar redirecionar e derrubar o corpo da mensagem, os dados sobrevivem 
-            // porque estão colados na URL. O Google sempre vai ler via 'e.parameter'.
             const finalUrl = GOOGLE_SHEETS_URL + '?' + queryString;
 
+            // DISPARO 1: Fetch (pode ser bloqueado no local, mas passa no GitHub)
             fetch(finalUrl, {
                 method: 'POST',
                 mode: 'no-cors'
-            }).catch(() => console.log("Erro de rede silencioso, tentando fallback..."));
+            }).catch(function(e) { console.log("Fetch local bloqueado, normal."); });
 
-            // Mantemos o Pixel Trick apenas para redundância extrema
+            // DISPARO 2: Pixel Trick (fura bloqueios locais e adblockers)
             const img = new Image();
             img.src = finalUrl;
 
-            // Avança para a tela de sucesso após 1.5s, dando tempo para os disparos saírem
+            // Avança para a tela de sucesso após 1.5s
             setTimeout(() => {
                 steps.forEach(step => step.classList.remove('active'));
                 document.getElementById('step-success').classList.add('active');

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição - Retiro BRISA</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Background Video / Image Cover -->
+    <div class="background-overlay"></div>
+
+    <main class="container">
+        
+        <header class="form-header">
+            <h1 class="brand-title">BRISA</h1>
+            <p class="subtitle">Yoga e Pausa na Mata Atlântica</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <div class="steps-indicators">
+                <span class="step active" data-step="1">1</span>
+                <span class="step" data-step="2">2</span>
+                <span class="step" data-step="3">3</span>
+                <span class="step" data-step="4">4</span>
+                <span class="step" data-step="5">5</span>
+            </div>
+        </div>
+
+        <form id="brisa-form" class="glass-form" novalidate>
+            
+            <!-- STEP 1: Pessoal -->
+            <section class="form-step active" id="step-1">
+                <h2>Seus Dados</h2>
+                <p class="section-desc">Vamos começar com as informações básicas para entrarmos em contato.</p>
+                
+                <div class="input-group">
+                    <label for="fullName">Nome Completo *</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-outlined">person</span>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Como você gosta de ser chamada?">
+                    </div>
+                    <span class="error-msg">Por favor, insira seu nome.</span>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="email">E-mail *</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined">mail</span>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        </div>
+                        <span class="error-msg">Insira um e-mail válido.</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="phone">Telefone / WhatsApp *</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined">call</span>
+                            <input type="tel" id="phone" name="phone" required placeholder="(11) 99999-9999">
+                        </div>
+                        <span class="error-msg">Insira seu telefone.</span>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="birthdate">Data de Nascimento *</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined">cake</span>
+                            <input type="date" id="birthdate" name="birthdate" required>
+                        </div>
+                        <span class="error-msg">Por favor, insira sua data de nascimento.</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="profession">Profissão *</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined">work</span>
+                            <input type="text" id="profession" name="profession" required placeholder="Sua profissão">
+                        </div>
+                        <span class="error-msg">Campo obrigatório.</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="maritalStatus">Estado civil *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">favorite</span>
+                        <select id="maritalStatus" name="maritalStatus" required>
+                            <option value="" disabled selected>Selecione seu estado civil</option>
+                            <option value="single">Solteira</option>
+                            <option value="married">Casada / União Estável</option>
+                            <option value="divorced">Divorciada</option>
+                            <option value="widowed">Viúva</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione uma opção.</span>
+                </div>
+
+                <div class="btn-group end">
+                    <button type="button" class="btn btn-primary next-btn">Continuar <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+            </section>
+
+            <!-- STEP 2: Logística -->
+            <section class="form-step" id="step-2">
+                <h2>Estadia & Alimentação</h2>
+                <p class="section-desc">Detalhes para prepararmos seu ninho de forma perfeita.</p>
+                
+                <div class="input-group">
+                    <label>Acomodação Principal *</label>
+                    <div class="radio-cards">
+                        <label class="radio-card">
+                            <input type="radio" name="accommodation" value="shared" checked required>
+                            <div class="card-content">
+                                <span class="material-symbols-outlined">group</span>
+                                <span>Chalé Duplo</span>
+                                <small>Para 2 pessoas</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="accommodationMsg">Se você prefere acomodação individual, deixe sua mensagem abaixo:</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="accommodationMsg" name="accommodationMsg" rows="2" placeholder="Escreva aqui se deseja solicitar quarto individual..."></textarea>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="diet">Restrições Alimentares *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">restaurant</span>
+                        <select id="diet" name="diet" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="none">Nenhuma restrição</option>
+                            <option value="vegetarian">Vegetariana</option>
+                            <option value="vegan">Vegana</option>
+                            <option value="gluten-free">Sem Glúten</option>
+                            <option value="other">Outra (especificar abaixo)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group hidden" id="diet-other-group">
+                    <label for="dietOther">Especifique suas restrições / alergias:</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="dietOther" name="dietOther" rows="2" placeholder="Ex: Alergia a amendoim, intolerância a lactose..."></textarea>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="transport">Como você vai chegar no Retiro? *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">directions_car</span>
+                        <select id="transport" name="transport" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="own">Meu veículo próprio</option>
+                            <option value="ride">Preciso de carona</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione como pretende chegar.</span>
+                </div>
+
+                <div class="btn-group space-between">
+                    <button type="button" class="btn btn-secondary prev-btn"><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+                    <button type="button" class="btn btn-primary next-btn">Continuar <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+            </section>
+
+            <!-- STEP 3: Informações de Saúde -->
+            <section class="form-step" id="step-3">
+                <h2>Informações de Saúde</h2>
+                <p class="section-desc">Para garantirmos sua segurança durante as atividades do retiro.</p>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="emergencyName">Contato de Emergência (Nome) *</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined">medical_information</span>
+                            <input type="text" id="emergencyName" name="emergencyName" required placeholder="Nome do familiar ou amigo">
+                        </div>
+                        <span class="error-msg">Campo obrigatório.</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="emergencyPhone">Telefone de Emergência *</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined">phone_in_talk</span>
+                            <input type="tel" id="emergencyPhone" name="emergencyPhone" required placeholder="(11) 99999-9999">
+                        </div>
+                        <span class="error-msg">Campo obrigatório.</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="hasMedicalCondition">Tem alguma condição médica ou alergia? *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">health_and_safety</span>
+                        <select id="hasMedicalCondition" name="hasMedicalCondition" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="yes">Sim</option>
+                            <option value="no">Não</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione uma opção.</span>
+                </div>
+
+                <div class="input-group hidden" id="medicalConditionDesc-group">
+                    <label for="medicalConditionDesc">Se sim, descreva seu problema: *</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="medicalConditionDesc" name="medicalConditionDesc" rows="2" placeholder="Descreva sua condição ou alergia..."></textarea>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="hasMedication">Faz uso de algum medicamento no momento? *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">vaccines</span>
+                        <select id="hasMedication" name="hasMedication" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="yes">Sim</option>
+                            <option value="no">Não</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione uma opção.</span>
+                </div>
+
+                <div class="input-group hidden" id="medicationDesc-group">
+                    <label for="medicationDesc">Se sim, me conte quais: *</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="medicationDesc" name="medicationDesc" rows="2" placeholder="Liste os medicamentos..."></textarea>
+                    </div>
+                </div>
+
+                <div class="btn-group space-between">
+                    <button type="button" class="btn btn-secondary prev-btn"><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+                    <button type="button" class="btn btn-primary next-btn">Continuar <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+            </section>
+
+            <!-- STEP 4: Informações Adicionais -->
+            <section class="form-step" id="step-4">
+                <h2>Informações Adicionais</h2>
+                <p class="section-desc">Queremos conhecer um pouco mais sobre você e suas expectativas.</p>
+
+                <div class="input-group">
+                    <label for="experience">Nível de Experiência com Yoga *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">self_improvement</span>
+                        <select id="experience" name="experience" required>
+                            <option value="" disabled selected>Como você avalia sua prática?</option>
+                            <option value="beginner">Iniciante (Nunca pratiquei ou pratico pouco)</option>
+                            <option value="intermediate">Intermediário (Pratico regularmente)</option>
+                            <option value="advanced">Avançado (Pratico há anos / sou instrutora)</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione seu nível de experiência.</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="previousRetreat">Você já participou de algum retiro anteriormente? *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">history</span>
+                        <select id="previousRetreat" name="previousRetreat" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="yes">Sim</option>
+                            <option value="no">Não</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione uma opção.</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="howDidYouHear">Como soube do retiro? *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">campaign</span>
+                        <select id="howDidYouHear" name="howDidYouHear" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="aluna">Sou aluna da Tali</option>
+                            <option value="amiga">Amiga / Indicação</option>
+                            <option value="social">Rede Social (Instagram, etc.)</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <span class="error-msg">Selecione uma opção.</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="expectations">Me conte o que você espera obter deste retiro? O que te moveu a se inscrever? *</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="expectations" name="expectations" rows="3" required placeholder="Escreva o que seu coração quiser, sem receio..."></textarea>
+                    </div>
+                    <span class="error-msg">Por favor, escreva um pouco sobre suas expectativas.</span>
+                </div>
+
+                <div class="input-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="imageRelease" name="imageRelease" required>
+                        <span class="checkmark"></span>
+                        <span class="terms-text"><strong>Autorização de Imagem:</strong> Autorizo o uso de imagens e vídeos produzidos no retiro para divulgação. *</span>
+                    </label>
+                    <span class="error-msg">A confirmação é obrigatória.</span>
+                </div>
+
+                <div class="input-group checkbox-group" style="margin-top: 1rem;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="declaration" name="declaration" required>
+                        <span class="checkmark"></span>
+                        <span class="terms-text"><strong>Declaração:</strong> Declaro que as informações fornecidas são verdadeiras e completas. Entendo que o Retiro BRISA é uma experiência que inclui atividades físicas (não necessitando de preparo prévio) e emocionais, e participo por minha própria vontade e responsabilidade. *</span>
+                    </label>
+                    <span class="error-msg">Você precisa concordar com a declaração.</span>
+                </div>
+
+                <div class="btn-group space-between">
+                    <button type="button" class="btn btn-secondary prev-btn"><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+                    <button type="button" class="btn btn-primary next-btn">Continuar <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+            </section>
+
+            <!-- STEP 5: Investimento -->
+            <section class="form-step" id="step-5">
+                <h2>Investimento</h2>
+                <p class="section-desc">Escolha a melhor opção de pagamento para você.</p>
+
+                <div class="input-group">
+                    <label>Opção de Pagamento *</label>
+                    <div class="radio-cards" style="flex-direction: column;">
+                        <label class="radio-card">
+                            <input type="radio" name="paymentType" id="payPix" value="pix" required>
+                            <div class="card-content" style="flex-direction: row; text-align: left; justify-content: space-between;">
+                                <div>
+                                    <span class="material-symbols-outlined" style="vertical-align: middle;">pix</span>
+                                    <span style="vertical-align: middle; margin-left: 5px;">À Vista no PIX</span>
+                                </div>
+                                <span style="font-weight: 600; color: var(--primary-color);">R$ 1.520,00</span>
+                            </div>
+                        </label>
+                        <small style="color: var(--text-muted); display: block; margin: 0.5rem 0 1rem 1rem;">* Valor promocional válido até 05/09.</small>
+
+                        <label class="radio-card">
+                            <input type="radio" name="paymentType" id="payInstallments" value="installments" required>
+                            <div class="card-content" style="flex-direction: row; text-align: left; justify-content: space-between;">
+                                <div>
+                                    <span class="material-symbols-outlined" style="vertical-align: middle;">credit_card</span>
+                                    <span style="vertical-align: middle; margin-left: 5px;">Parcelado</span>
+                                </div>
+                                <span style="font-weight: 600;">R$ 1.655,00</span>
+                            </div>
+                        </label>
+                    </div>
+                    <span class="error-msg">Selecione uma opção de pagamento.</span>
+                </div>
+
+                <div class="input-group hidden" id="installments-group">
+                    <label for="installments">Opções de Parcelamento *</label>
+                    <div class="input-wrapper select-wrapper">
+                        <span class="material-symbols-outlined">payments</span>
+                        <select id="installments" name="installments">
+                            <option value="" disabled selected>Escolha o número de parcelas</option>
+                            <option value="2">2 x R$ 827,50</option>
+                            <option value="3">3 x R$ 551,67</option>
+                            <option value="4">4 x R$ 413,75</option>
+                            <option value="5">5 x R$ 331,00</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.4); padding: 1rem; border-left: 4px solid var(--primary-color); border-radius: 8px; margin-top: 1.5rem;">
+                    <p style="font-size: 0.85rem; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-main);">
+                        <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; color: var(--error-color);">error</span> 
+                        ATENÇÃO
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+                        As opções parceladas devem ser feitas no <strong>cartão de crédito</strong> ou <strong>pix programado</strong>. 
+                        A <strong>primeira parcela</strong> deve ser realizada no PIX para garantir sua reserva.
+                    </p>
+                </div>
+
+                <div class="btn-group space-between">
+                    <button type="button" class="btn btn-secondary prev-btn"><span class="material-symbols-outlined">arrow_back</span> Voltar</button>
+                    <button type="submit" class="btn btn-primary submit-btn">Finalizar Inscrição <span class="material-symbols-outlined">check_circle</span></button>
+                </div>
+            </section>
+
+            <!-- Success State -->
+            <section class="form-step success-step" id="step-success">
+                <div class="success-icon">
+                    <span class="material-symbols-outlined">spa</span>
+                </div>
+                <h2>Quase lá...</h2>
+                <p>Recebemos as suas informações, mas <strong>a inscrição ainda não foi finalizada!</strong></p>
+                <p class="section-desc" style="margin-top: 0.5rem;">Entraremos em contato em breve via WhatsApp/Email com as instruções de pagamento para garantir a sua vaga e concluir o processo.</p>
+            </section>
+
+        </form>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

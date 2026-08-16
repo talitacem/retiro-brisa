@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             const FORMSPREE_URL = 'https://formspree.io/f/xrpzqooz';
-            const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbybiWhU3MYT4-qM2npdXC8xVOZTgdymehRUNwGTDrLrnzYZXUi8cfE5LjOhucWECJc_/exec';
+            const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzSjLF4PaGM2tM3tJmRBDAV8moaN7-9f1Vcb3VUGTjIpnlt2hcJyyTTwhDxPyHkqt1d/exec';
             
             // LER O DOM DIRETAMENTE (BLINDADO CONTRA QUALQUER NAVEGADOR ANTIGO)
             const getVal = (id) => document.getElementById(id) ? document.getElementById(id).value : "";

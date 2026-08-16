@@ -150,15 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const finalUrl = GOOGLE_SHEETS_URL + '?' + queryString;
 
-            // DISPARO 1: Fetch (pode ser bloqueado no local, mas passa no GitHub)
+            // DISPARO ÚNICO: Fetch (Funciona perfeitamente no GitHub Pages)
             fetch(finalUrl, {
                 method: 'POST',
                 mode: 'no-cors'
             }).catch(function(e) { console.log("Fetch local bloqueado, normal."); });
-
-            // DISPARO 2: Pixel Trick (fura bloqueios locais e adblockers)
-            const img = new Image();
-            img.src = finalUrl;
 
             // Avança para a tela de sucesso após 1.5s
             setTimeout(() => {

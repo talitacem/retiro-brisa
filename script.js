@@ -141,20 +141,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 cleanData.append(mapping[key] || key, value);
             }
 
-            // Prepara os dados no formato blindado (URL Encoded)
-            const urlEncodedData = new URLSearchParams();
+            // Converte os dados do form para um objeto Javascript simples
+            const dataObj = {};
             for (let [key, value] of cleanData.entries()) {
-                urlEncodedData.append(key, value);
+                dataObj[key] = value;
             }
 
-            // Método 1: Envia via POST (Padrão)
+            // O SEGREDO MÁXIMO: Envia como TEXTO PURO (JSON em string).
+            // Navegadores não bloqueiam text/plain no-cors, e o Google recebe a string crua perfeitamente.
             fetch(GOOGLE_SHEETS_URL, {
                 method: 'POST',
-                body: urlEncodedData,
-                mode: 'no-cors'
-            }).catch(() => console.log("POST request initiated"));
+                body: JSON.stringify(dataObj),
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                }
+            }).catch(() => console.log("Erro silencioso de rede"));
 
-            // Método 2: Envia via GET Pixel Trick (Redundância absoluta, fura qualquer bloqueio)
+            // Mantemos o Pixel Trick apenas para redundância e debug!
+            const urlEncodedData = new URLSearchParams(dataObj);
             const img = new Image();
             img.src = GOOGLE_SHEETS_URL + '?' + urlEncodedData.toString();
 
